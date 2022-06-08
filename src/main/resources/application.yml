@@ -1,1 +1,15 @@
-
+server:
+  port: 9090
+spring:
+  datasource:
+    username: nibras
+    password: 1234
+    url: jdbc:postgresql://localhost:5432/patient-db
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
