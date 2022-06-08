@@ -1,6 +1,7 @@
 package com.aeturnum.patient.service.impl;
 
 import com.aeturnum.patient.dao.Patient;
+import com.aeturnum.patient.exception.PatientNotFoundException;
 import com.aeturnum.patient.repository.PatientRepository;
 import com.aeturnum.patient.service.PatientService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +24,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient getPatientById(int id) {
+    public Patient getPatientById(int id) throws PatientNotFoundException {
         Optional<Patient> optionalPatient = patientRepository.findById(id);
         if (optionalPatient.isPresent()) {
             return optionalPatient.get();
         } else {
-            log.info(String.format("Patient Id: %s not found", id));
-            return null;
+            log.info(String.format("Patient Id: %s not found!", id));
+            throw new PatientNotFoundException(String.format("Patient Id: %s not found", id));
         }
     }
 
